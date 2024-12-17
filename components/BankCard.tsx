@@ -2,7 +2,7 @@ import { formatAmount } from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import Copy from './Copy'
+//import Copy from './Copy'
 
 const BankCard = ({ account, userName, showBalance = true }: CreditCardProps) => {
 
@@ -13,7 +13,7 @@ const BankCard = ({ account, userName, showBalance = true }: CreditCardProps) =>
         <div className="bank-card_content">
           <div>
             <h1 className="text-16 font-semibold text-white">
-              {account.name}
+              {account.name || userName}
             </h1>
             <p className="font-ibm-plex-serif font-black text-white">
               {formatAmount(account.currentBalance)}
@@ -26,7 +26,7 @@ const BankCard = ({ account, userName, showBalance = true }: CreditCardProps) =>
                 {userName}
               </h1>
               <h2 className="text-12 font-semibold text-white">
-              ●● / ●●
+              ●● / ●● 
               </h2>
             </div>
             <p className="text-14 font-semibold tracking-[1.1px] text-white">
@@ -47,7 +47,7 @@ const BankCard = ({ account, userName, showBalance = true }: CreditCardProps) =>
             width={45}
             height={32}
             alt="mastercard"
-            className="ml-5"
+            className="ml-7"
           />
         </div>
 
@@ -60,7 +60,7 @@ const BankCard = ({ account, userName, showBalance = true }: CreditCardProps) =>
         />
       </Link>
 
-      {showBalance && <Copy title={account?.sharaebleId} />}
+      {/* {showBalance && <Copy title={account?.sharaebleId} />} */}
     </div>
   )
 }
