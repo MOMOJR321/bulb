@@ -1,6 +1,5 @@
 import AuthForm from '@/components/AuthForm'
-
-const SignUp = () => {
+const SignUp = async () => {
   return (
   <section className='flex-center size-full'>
     <AuthForm type = "sign-up"/>
