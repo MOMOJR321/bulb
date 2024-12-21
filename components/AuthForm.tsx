@@ -23,16 +23,14 @@ import { authFormSchema } from '@/lib/utils';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { getLoggedInUser, signIn, signUp } from '@/lib/actions/user.actions';
-// import { getLoggedInUser, signIn, signUp } from '@/lib/actions/user.actions';
-//import PlaidLink from './PlaidLink';
+import PlaidLink from './PlaidLink';
 
 const AuthForm = ({ type }: { type: string }) => {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  
 
- const formSchema = authFormSchema(type);
+  const formSchema = authFormSchema(type);
 
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
@@ -51,24 +49,24 @@ const AuthForm = ({ type }: { type: string }) => {
         // Sign up with Appwrite & create plaid token
         
         if(type === 'sign-up') {
-          // const userData = {
-          //   firstName: data.firstName!,
-          //   lastName: data.lastName!,
-          //   address1: data.address1!,
-          //   city: data.city!,
-          //   state: data.province!,
-          //   postalCode: data.postalCode!,
-          //   dateOfBirth: data.dateOfBirth!,
-          //   ssn: data.ssn!,
-          //   email: data.email,
-          //   password: data.password
-          // }
+          const userData = {
+            firstName: data.firstName!,
+            lastName: data.lastName!,
+            address1: data.address1!,
+            city: data.city!,
+            state: data.state!,
+            postalCode: data.postalCode!,
+            dateOfBirth: data.dateOfBirth!,
+            ssn: data.ssn!,
+            email: data.email,
+            password: data.password
+          }
 
-          const newUser = await signUp(data);
+          const newUser = await signUp(userData);
 
           setUser(newUser);
         }
- 
+
         if(type === 'sign-in') {
           const response = await signIn({
             email: data.email,
@@ -116,7 +114,7 @@ const AuthForm = ({ type }: { type: string }) => {
       </header>
       {user ? (
         <div className="flex flex-col gap-4">
-          {/* <PlaidLink user={user} variant="primary" /> */}
+          <PlaidLink user={user} variant="primary" />
         </div>
       ): (
         <>
@@ -131,7 +129,7 @@ const AuthForm = ({ type }: { type: string }) => {
                   <CustomInput control={form.control} name='address1' label="Address" placeholder='Enter your specific address' />
                   <CustomInput control={form.control} name='city' label="City" placeholder='Enter your city' />
                   <div className="flex gap-4">
-                    <CustomInput control={form.control} name='province' label="Province" placeholder='Example: Chipata' />
+                    <CustomInput control={form.control} name='state' label="State" placeholder='Example: NY' />
                     <CustomInput control={form.control} name='postalCode' label="Postal Code" placeholder='Example: 11101' />
                   </div>
                   <div className="flex gap-4">
